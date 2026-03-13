@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+
+
+
+    <title>Resumen del Pedido</title>
+</head>
+
+<body>
+
+    <h2>Resumen de tu pedido</h2>
+
+    <p><strong>Cliente:</strong> <span th:text="${resumenPedido.nombreCliente}"></span></p>
+    <p><strong>Mesa:</strong> <span th:text="${resumenPedido.numeroMesa}"></span></p>
+    <p><strong>Productos:</strong>
+    <ul>
+        <li th:each="producto : ${resumenPedido.listaProductos}" th:text="${producto}"></li>
+    </ul>
+
+    </p>
+    <p><strong>Tamaño:</strong> <span th:text="${resumenPedido.tamanio}"></span></p>
+    <p><strong>Cantidad:</strong> <span th:text="${resumenPedido.cantidad}"></span></p>
+    <p><strong>Adicionales:</strong>
+    <ul>
+        <li th:each="extra : ${resumenPedido.opcionesAdicionales}" th:text="${extra}"></li>
+    </ul>
+
+
+    </p>
+    <p><strong>Total a pagar:</strong> S/ <span th:text="${resumenPedido.total}"></span></p>
+
+    <hr>
+
+    <h3>Califica tu experiencia</h3>
+
+    <form th:action="@{/enviar-calificacion}" th:object="${formularioCalificacion}" method="post">
+        <label>Estrellas:</label>
+
+        <select th:field="*{estrellas}">
+            <option value="1">⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+
+        </select><br><br>
+
+        <label>Comentario:</label><br>
+        <textarea th:field="*{comentario}" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Enviar calificacion</button>
+    </form>
+</body>
+
+</html>
